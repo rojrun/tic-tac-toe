@@ -1,33 +1,39 @@
 import React, {useState} from 'react';
 import {Paper, ButtonGroup, Button} from '@mui/material';
 
-const StartGame = ({setPlayerCount, setVisible, setPlayerOne, setPlayerTwo, setIsComputer}: any) => {
-  const [isPlayerOneSelected, setIsPlayerOneSelected] = useState(false);
+interface StartGameProps {
+  setVisible: Function;
+  setPlayerX: Function;
+  setPlayerO: Function;
+  setCurrentPlayer: Function;
+}
+
+const StartGame = ({setVisible, setPlayerX, setPlayerO, setCurrentPlayer}: StartGameProps) => {
+  const [isPlayerSelected, setIsPlayerSelected] = useState(false);
 
   const handleOnePlayer = () => {
-    setPlayerCount(1);
-    setIsPlayerOneSelected(true);
+    setIsPlayerSelected(true);
   }
 
   const handleTwoPlayers = () => {
-    setPlayerCount(2);
-    setPlayerOne("X");
-    setPlayerTwo("O");
+    setPlayerX("Player");
+    setPlayerO("Player");
+    setCurrentPlayer("X");
     setVisible(false);
   }
 
   const handleSelectX = () => {
-    setPlayerOne("X");
-    setPlayerTwo("O");
+    setPlayerX("Player");
+    setPlayerO("Computer");
+    setCurrentPlayer("X");
     setVisible(false);
-    setIsComputer(true);
   }
 
   const handleSelectO = () => {
-    setPlayerOne("O");
-    setPlayerTwo("X");
+    setPlayerX("Computer");
+    setPlayerO("Player");
+    setCurrentPlayer("X");
     setVisible(false);
-    setIsComputer(true);
   }
 
   return (
@@ -39,9 +45,9 @@ const StartGame = ({setPlayerCount, setVisible, setPlayerOne, setPlayerTwo, setI
           <Button onClick={handleTwoPlayers}>Two players</Button>
         </ButtonGroup>
       </Paper>
-      { isPlayerOneSelected
+      { isPlayerSelected
         ? <Paper variant="outlined">
-            <p>Player One, select X or O.</p>
+            <p>Player, select X or O.</p>
             <p>(X's go first)</p>
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
               <Button onClick={handleSelectX}>X</Button>

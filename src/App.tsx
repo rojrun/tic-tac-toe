@@ -7,6 +7,7 @@ import './App.css';
 
 const App = () => {
   const [visible, setVisible] = useState<boolean>(true);
+  const [playerCount, setPlayerCount] = useState<number>(0);
   const [playerX, setPlayerX] = useState<string>("");
   const [playerO, setPlayerO] = useState<string>("");
   const [currentPlayer, setCurrentPlayer] = useState<string>("");
@@ -14,21 +15,16 @@ const App = () => {
   const [xWins, setXWins] = useState<number>(0);
   const [oWins, setOWins] = useState<number>(0);
   
-  useEffect(() => {
-    console.log("currentPlayer: ", currentPlayer);
-    console.log("xWins: ", xWins);
-    console.log("oWins: ", oWins);
-  }, [currentPlayer, xWins, oWins]);
-
   return (
     <Container maxWidth="sm">
-      <Paper variant="outlined">TIC TAC TOE</Paper>
+      <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>TIC TAC TOE</Paper>
       { visible &&
         <StartGame 
           setVisible={setVisible} 
           setPlayerX={setPlayerX} 
           setPlayerO={setPlayerO}
           setCurrentPlayer={setCurrentPlayer}
+          setPlayerCount={setPlayerCount}
         /> 
       }
       { !visible &&
@@ -38,18 +34,25 @@ const App = () => {
             playerO={playerO}
             currentPlayer={currentPlayer} 
             xWins={xWins} 
-            oWins={oWins} 
+            oWins={oWins}
             totalGameCount={totalGameCount} 
           />
           <GameBoard
+            playerCount={playerCount}
+            setPlayerCount={setPlayerCount}
+            setVisible={setVisible}
             currentPlayer={currentPlayer}
             setCurrentPlayer={setCurrentPlayer}
+            playerX={playerX}
+            setPlayerX={setPlayerX}
+            playerO={playerO}
+            setPlayerO={setPlayerO}
             xWins={xWins}
             setXWins={setXWins}
             oWins={oWins}
             setOWins={setOWins}
-            totalGameCount={totalGameCount} 
-            setTotalGameCount={setTotalGameCount} 
+            totalGameCount={totalGameCount}
+            setTotalGameCount={setTotalGameCount}
           />
         </>
       }

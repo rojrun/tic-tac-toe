@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PlayAgainResetButtons from './PlayAgainResetButtons';
-import {Box, Paper, Stack} from '@mui/material';
+import {Box, Paper, Grid, Stack} from '@mui/material';
 
 interface GameBoardProps {
   currentPlayer: string;
@@ -16,8 +16,6 @@ interface GameBoardProps {
   totalGameCount: number;
   setTotalGameCount: Function;
   setVisible: Function;
-  playerCount: number;
-  setPlayerCount: Function;
 }
 
 const GameBoard = (
@@ -35,8 +33,6 @@ const GameBoard = (
     totalGameCount,
     setTotalGameCount,
     setVisible,
-    playerCount,
-    setPlayerCount
   }: GameBoardProps) => {
 
   const initialArray = [
@@ -47,26 +43,29 @@ const GameBoard = (
   const [gameBoard, setGameBoard] = useState<string[][]>(initialArray);
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
   const refs = useRef<HTMLDivElement | null>(null);
+  const letter = (currentPlayer.split(" "))[1];
 
   useEffect(() => {
     console.log("currentPlayer: ", currentPlayer);
-    if (playerCount === 1) {
+    if (currentPlayer.includes("Computer")) {
       const newGameBoard: string[][] = [...gameBoard];
       const randomArray = Math.floor(Math.random() * newGameBoard.length);
       const randomIndex = Math.floor(Math.random() * newGameBoard[randomArray].length);
       
       if (newGameBoard[randomArray][randomIndex] === "") {
-        newGameBoard[randomArray].splice(randomIndex, 1, currentPlayer);
+        newGameBoard[randomArray].splice(randomIndex, 1, letter);
         setGameBoard(newGameBoard);
         checkForWinner();
       } 
     } 
-  });
+  }, [currentPlayer]);
+
+  
 
   const handleMarkBox = (row: number, column: number) => {
     const newGameBoard = [...gameBoard];
     if (newGameBoard[row][column] === "") {
-      newGameBoard[row].splice(column, 1, currentPlayer);
+      newGameBoard[row].splice(column, 1, letter);
       setGameBoard(newGameBoard);
       checkForWinner();
     }
@@ -75,18 +74,18 @@ const GameBoard = (
   const checkForWinner = () => {
     if ( 
       // Horizontal lines
-      (gameBoard[0][0] === currentPlayer) && (gameBoard[0][1] === currentPlayer) && (gameBoard[0][2] === currentPlayer) ||
-      (gameBoard[1][0] === currentPlayer) && (gameBoard[1][1] === currentPlayer) && (gameBoard[1][2] === currentPlayer) ||
-      (gameBoard[2][0] === currentPlayer) && (gameBoard[2][1] === currentPlayer) && (gameBoard[2][2] === currentPlayer) ||
+      (gameBoard[0][0] === letter) && (gameBoard[0][1] === letter) && (gameBoard[0][2] === letter) ||
+      (gameBoard[1][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[1][2] === letter) ||
+      (gameBoard[2][0] === letter) && (gameBoard[2][1] === letter) && (gameBoard[2][2] === letter) ||
       // Vertical lines
-      (gameBoard[0][0] === currentPlayer) && (gameBoard[1][0] === currentPlayer) && (gameBoard[2][0] === currentPlayer) ||
-      (gameBoard[0][1] === currentPlayer) && (gameBoard[1][1] === currentPlayer) && (gameBoard[2][1] === currentPlayer) ||
-      (gameBoard[0][2] === currentPlayer) && (gameBoard[1][2] === currentPlayer) && (gameBoard[2][2] === currentPlayer) ||
+      (gameBoard[0][0] === letter) && (gameBoard[1][0] === letter) && (gameBoard[2][0] === letter) ||
+      (gameBoard[0][1] === letter) && (gameBoard[1][1] === letter) && (gameBoard[2][1] === letter) ||
+      (gameBoard[0][2] === letter) && (gameBoard[1][2] === letter) && (gameBoard[2][2] === letter) ||
       // Diagonal lines
-      (gameBoard[0][0] === currentPlayer) && (gameBoard[1][1] === currentPlayer) && (gameBoard[2][2] === currentPlayer) ||
-      (gameBoard[2][0] === currentPlayer) && (gameBoard[1][1] === currentPlayer) && (gameBoard[0][2] === currentPlayer) 
+      (gameBoard[0][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[2][2] === letter) ||
+      (gameBoard[2][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[0][2] === letter)
     ) {
-      if (currentPlayer === "X") {
+      if (currentPlayer.includes("X")) {
         setXWins(++xWins);
         setShowPlayAgainBttn(true);
       } else {
@@ -95,10 +94,10 @@ const GameBoard = (
       }
     } else {
       // Switch currentPlayer
-      if (currentPlayer === "X") {
-        setCurrentPlayer("O");
+      if (currentPlayer.includes("X")) {
+        setCurrentPlayer(playerO);
       } else {
-        setCurrentPlayer("X");
+        setCurrentPlayer(playerX);
       }
     }
   }
@@ -106,36 +105,28 @@ const GameBoard = (
   return (
     <>
       <Paper variant="outlined" ref={refs} sx={{my: 2, p: 4, textAlign: "center"}}>
-        { gameBoard.map((array, rowIndex) => {
-            return (
-              <Stack 
-                direction="row" 
-                justifyContent="center" 
-                alignItems="center"
-                key={rowIndex} 
-                sx={{borderBottom: 2}}
-              >
-                { array.map((string, colIndex) => {
-                    return (
-                      <Box 
-                        component="div"
-                        key={colIndex}
-                      >
+        <Grid container>
+          { gameBoard.map((row, rowIndex) => {
+              return (
+                <Grid item xs={4} key={rowIndex}>
+                  { row.map((column, colIndex) => {
+                      return (
                         <Box
                           component="div"
-                          sx={{p: 2}}
+                          key={colIndex}
                           onClick={() => handleMarkBox(rowIndex, colIndex)}
+                          sx={{height: 90, border: 2}}
                         >
-                          { !string ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{string}&nbsp;</span> }
+                          { !column ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{column}&nbsp;</span> }
                         </Box>
-                      </Box>
-                    );
-                  })
-                }
-              </Stack>
-            );
-          })
-        }
+                      )
+                    })
+                  }
+                </Grid>
+              )
+            })
+          }
+        </Grid>
       </Paper>
       <PlayAgainResetButtons 
         showPlayAgainBttn={showPlayAgainBttn}
@@ -144,13 +135,13 @@ const GameBoard = (
         setTotalGameCount={setTotalGameCount}
         setVisible={setVisible}
         setCurrentPlayer={setCurrentPlayer}
+        playerX={playerX}
         setPlayerX={setPlayerX}
         setPlayerO={setPlayerO}
         setXWins={setXWins}
         setOWins={setOWins}
         initialArray={initialArray}
         setGameBoard={setGameBoard}
-        setPlayerCount={setPlayerCount}
       />
     </>
   );

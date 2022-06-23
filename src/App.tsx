@@ -7,7 +7,6 @@ import './App.css';
 
 const App = () => {
   const [visible, setVisible] = useState<boolean>(true);
-  const [playerCount, setPlayerCount] = useState<number>(0);
   const [playerX, setPlayerX] = useState<string>("");
   const [playerO, setPlayerO] = useState<string>("");
   const [currentPlayer, setCurrentPlayer] = useState<string>("");
@@ -16,7 +15,7 @@ const App = () => {
   const [oWins, setOWins] = useState<number>(0);
   
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xs">
       <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>TIC TAC TOE</Paper>
       { visible &&
         <StartGame 
@@ -24,7 +23,6 @@ const App = () => {
           setPlayerX={setPlayerX} 
           setPlayerO={setPlayerO}
           setCurrentPlayer={setCurrentPlayer}
-          setPlayerCount={setPlayerCount}
         /> 
       }
       { !visible &&
@@ -38,8 +36,6 @@ const App = () => {
             totalGameCount={totalGameCount} 
           />
           <GameBoard
-            playerCount={playerCount}
-            setPlayerCount={setPlayerCount}
             setVisible={setVisible}
             currentPlayer={currentPlayer}
             setCurrentPlayer={setCurrentPlayer}

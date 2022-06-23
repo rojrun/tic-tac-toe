@@ -6,44 +6,40 @@ interface StartGameProps {
   setPlayerX: Function;
   setPlayerO: Function;
   setCurrentPlayer: Function;
-  setPlayerCount: Function;
 }
 
 const StartGame = (
-  {
+  { 
     setVisible,
     setPlayerX,
     setPlayerO,
-    setCurrentPlayer,
-    setPlayerCount
+    setCurrentPlayer
   }: StartGameProps) => {
 
   const [isPlayerSelected, setIsPlayerSelected] = useState(false);
 
   const handleOnePlayer = () => {
     setIsPlayerSelected(true);
-    setPlayerCount(1);
   }
 
   const handleTwoPlayers = () => {
-    setPlayerX("Player");
-    setPlayerO("Player");
-    setCurrentPlayer("X");
-    setPlayerCount(2);
+    setPlayerX("Player X");
+    setPlayerO("Player O");
+    setCurrentPlayer("Player X");
     setVisible(false);
   }
 
   const handleSelectX = () => {
-    setPlayerX("Player");
-    setPlayerO("Computer");
-    setCurrentPlayer("X");
+    setPlayerX("Player X");
+    setPlayerO("Computer O");
+    setCurrentPlayer("Player X");
     setVisible(false);
   }
 
   const handleSelectO = () => {
-    setPlayerX("Computer");
-    setPlayerO("Player");
-    setCurrentPlayer("X");
+    setPlayerX("Computer X");
+    setPlayerO("Player O");
+    setCurrentPlayer("Computer X");
     setVisible(false);
   }
 

@@ -8,13 +8,13 @@ interface PlayAgainResetButtonsProps {
   setTotalGameCount: Function;
   setVisible: Function;
   setCurrentPlayer: Function;
+  playerX: string;
   setPlayerX: Function;
   setPlayerO: Function;
   setXWins: Function;
   setOWins: Function;
   initialArray: string[][];
   setGameBoard: Function;
-  setPlayerCount: Function;
 }
 
 const PlayAgainResetButtons = (
@@ -25,18 +25,18 @@ const PlayAgainResetButtons = (
     setTotalGameCount,
     setVisible,
     setCurrentPlayer,
+    playerX,
     setPlayerX,
     setPlayerO,
     setXWins,
     setOWins,
     initialArray,
     setGameBoard,
-    setPlayerCount
   }: PlayAgainResetButtonsProps) => {
   
   const handlePlayAgain = () => {
     setTotalGameCount(++totalGameCount);
-    setCurrentPlayer("X");
+    setCurrentPlayer(playerX);
     setShowPlayAgainBttn(false);
     setGameBoard(initialArray);
   }
@@ -51,7 +51,6 @@ const PlayAgainResetButtons = (
     setXWins(0);
     setOWins(0);
     setGameBoard(initialArray);
-    setPlayerCount(0);
   }
 
   return (

@@ -47,20 +47,20 @@ const GameBoard = (
 
   useEffect(() => {
     console.log("currentPlayer: ", currentPlayer);
-    if (currentPlayer.includes("Computer")) {
+    if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
       const newGameBoard: string[][] = [...gameBoard];
       const randomArray = Math.floor(Math.random() * newGameBoard.length);
       const randomIndex = Math.floor(Math.random() * newGameBoard[randomArray].length);
       
-      if (newGameBoard[randomArray][randomIndex] === "") {
-        newGameBoard[randomArray].splice(randomIndex, 1, letter);
-        setGameBoard(newGameBoard);
-        checkForWinner();
-      } 
+      setTimeout(() => {
+        if (newGameBoard[randomArray][randomIndex] === "") {
+          newGameBoard[randomArray].splice(randomIndex, 1, letter);
+          setGameBoard(newGameBoard);
+          checkForWinner();
+        }
+      }, 3000);
     } 
   }, [currentPlayer]);
-
-  
 
   const handleMarkBox = (row: number, column: number) => {
     const newGameBoard = [...gameBoard];

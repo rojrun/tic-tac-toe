@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PlayAgainResetButtons from './PlayAgainResetButtons';
-import {Box, Paper, Grid, Stack} from '@mui/material';
+import {Box, Paper, Grid} from '@mui/material';
 
 interface GameBoardProps {
   currentPlayer: string;
@@ -35,55 +35,79 @@ const GameBoard = (
     setVisible,
   }: GameBoardProps) => {
 
-  const initialArray = [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ];
-  const [gameBoard, setGameBoard] = useState<string[][]>(initialArray);
+  const [gameBoard, setGameBoard] = useState<string[] | undefined>();
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
-  const refs = useRef<HTMLDivElement | null>(null);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
   const letter = (currentPlayer.split(" "))[1];
+  const initialArray: string[] = [];
 
   useEffect(() => {
-    console.log("currentPlayer: ", currentPlayer);
-    if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
-      const newGameBoard: string[][] = [...gameBoard];
-      const randomArray = Math.floor(Math.random() * newGameBoard.length);
-      const randomIndex = Math.floor(Math.random() * newGameBoard[randomArray].length);
-      
-      setTimeout(() => {
-        if (newGameBoard[randomArray][randomIndex] === "") {
-          newGameBoard[randomArray].splice(randomIndex, 1, letter);
-          setGameBoard(newGameBoard);
-          checkForWinner();
-        }
-      }, 3000);
-    } 
-  }, [currentPlayer]);
+    // Create an array of empty strings
+    for (let i = 0; i < 9; i++) {
+      initialArray.push("");
+    }
+    setGameBoard(initialArray);
+  }, []);
 
-  const handleMarkBox = (row: number, column: number) => {
-    const newGameBoard = [...gameBoard];
-    if (newGameBoard[row][column] === "") {
-      newGameBoard[row].splice(column, 1, letter);
-      setGameBoard(newGameBoard);
-      checkForWinner();
+  // useEffect(() => {
+  //   if (refs.current !== "null" && refs.current.length > 0) {
+  //     console.log("refs: ", refs.current.length);
+  //   }
+    // if (showPlayAgainBttn) {
+    //   refs.current?.map((element) => {
+    //     return () => {
+    //       element.removeEventListener("click", handleMarkBox);
+    //     }
+    //   })
+    // }
+  // }, [showPlayAgainBttn]);
+
+  useEffect(() => {
+    console.log("gameBoard: ", gameBoard);
+    console.log("refs: ", refs.current);
+  }, [gameBoard]);
+
+  // useEffect(() => {
+  //   console.log("currentPlayer: ", currentPlayer);
+  //   if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
+  //     const newGameBoard: string[][] = [...gameBoard];
+  //     const randomArray = Math.floor(Math.random() * newGameBoard.length);
+  //     const randomIndex = Math.floor(Math.random() * newGameBoard[randomArray].length);
+      
+  //     setTimeout(() => {
+  //       if (newGameBoard[randomArray][randomIndex] === "") {
+  //         newGameBoard[randomArray].splice(randomIndex, 1, letter);
+  //         setGameBoard(newGameBoard);
+  //         checkForWinner();
+  //       }
+  //     }, 3000);
+  //   } 
+  // }, [currentPlayer]);
+
+  const handleMarkBox = (arrayIndex: number) => {
+    const newGameBoard = [...[gameBoard]][0];
+    if ( newGameBoard && (newGameBoard.length > 0) ) {
+      if (newGameBoard[arrayIndex] === "") {
+        newGameBoard.splice(arrayIndex, 1, letter);
+        setGameBoard([...newGameBoard]);
+        checkForWinner();
+      }
     }
   }
 
   const checkForWinner = () => {
-    if ( 
+    if ( gameBoard && (
       // Horizontal lines
-      (gameBoard[0][0] === letter) && (gameBoard[0][1] === letter) && (gameBoard[0][2] === letter) ||
-      (gameBoard[1][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[1][2] === letter) ||
-      (gameBoard[2][0] === letter) && (gameBoard[2][1] === letter) && (gameBoard[2][2] === letter) ||
+      (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ||
+      (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ||
+      (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ||
       // Vertical lines
-      (gameBoard[0][0] === letter) && (gameBoard[1][0] === letter) && (gameBoard[2][0] === letter) ||
-      (gameBoard[0][1] === letter) && (gameBoard[1][1] === letter) && (gameBoard[2][1] === letter) ||
-      (gameBoard[0][2] === letter) && (gameBoard[1][2] === letter) && (gameBoard[2][2] === letter) ||
+      (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ||
+      (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ||
+      (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ||
       // Diagonal lines
-      (gameBoard[0][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[2][2] === letter) ||
-      (gameBoard[2][0] === letter) && (gameBoard[1][1] === letter) && (gameBoard[0][2] === letter)
+      (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ||
+      (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) )
     ) {
       if (currentPlayer.includes("X")) {
         setXWins(++xWins);
@@ -104,31 +128,26 @@ const GameBoard = (
 
   return (
     <>
-      <Paper variant="outlined" ref={refs} sx={{my: 2, p: 4, textAlign: "center"}}>
-        <Grid container>
-          { gameBoard.map((row, rowIndex) => {
-              return (
-                <Grid item xs={4} key={rowIndex}>
-                  { row.map((column, colIndex) => {
-                      return (
-                        <Box
-                          component="div"
-                          key={colIndex}
-                          onClick={() => handleMarkBox(rowIndex, colIndex)}
-                          sx={{height: 90, border: 2}}
-                        >
-                          { !column ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{column}&nbsp;</span> }
-                        </Box>
-                      )
-                    })
-                  }
-                </Grid>
-              )
-            })
+      <Paper variant="outlined" sx={{my: 2, p: 4, textAlign: "center"}}>
+        <Grid container wrap="wrap" direction="row" alignItems="center" justifyContent="center" ref={refs}>
+          { gameBoard && gameBoard.length > 0 ? (
+              gameBoard.map((string, index) => {
+                return (
+                  <Grid item xs={4} key={index} onClick={() => handleMarkBox(index)}>
+                    <Box
+                      component="div"
+                      sx={{height: 90, border: 2}}
+                    >
+                      { !string ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{string}&nbsp;</span> }
+                    </Box>
+                  </Grid>
+                )
+              })
+            ) : null
           }
         </Grid>
       </Paper>
-      <PlayAgainResetButtons 
+      {/* <PlayAgainResetButtons 
         showPlayAgainBttn={showPlayAgainBttn}
         setShowPlayAgainBttn={setShowPlayAgainBttn}
         totalGameCount={totalGameCount}
@@ -142,7 +161,7 @@ const GameBoard = (
         setOWins={setOWins}
         initialArray={initialArray}
         setGameBoard={setGameBoard}
-      />
+      /> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Paper, ButtonGroup, Button} from '@mui/material';
 
 interface PlayAgainResetButtonsProps {
@@ -13,7 +13,7 @@ interface PlayAgainResetButtonsProps {
   setPlayerO: Function;
   setXWins: Function;
   setOWins: Function;
-  initialArray: string[][];
+  initialArray: string[];
   setGameBoard: Function;
 }
 
@@ -31,8 +31,13 @@ const PlayAgainResetButtons = (
     setXWins,
     setOWins,
     initialArray,
-    setGameBoard,
+    setGameBoard
   }: PlayAgainResetButtonsProps) => {
+
+  useEffect(() => {
+    console.log("initialArray: ", initialArray);
+    
+  });  
   
   const handlePlayAgain = () => {
     setTotalGameCount(++totalGameCount);

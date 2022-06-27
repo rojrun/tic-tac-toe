@@ -32,12 +32,12 @@ const GameBoard = (
     setPlayerO,
     totalGameCount,
     setTotalGameCount,
-    setVisible,
+    setVisible
   }: GameBoardProps) => {
 
   const [gameBoard, setGameBoard] = useState<string[] | undefined>();
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const gridRefs = useRef<(HTMLDivElement | null)[]>([]);
   const letter = (currentPlayer.split(" "))[1];
   const initialArray: string[] = [];
 
@@ -47,53 +47,50 @@ const GameBoard = (
       initialArray.push("");
     }
     setGameBoard(initialArray);
+    console.log("initialArray: ", initialArray);
+    // Add event listener to ref elements
+    // gridRefs?.current.map((el, index) => {
+    //   el?.addEventListener("click", handleMarkBox);
+    // });
   }, []);
 
-  // useEffect(() => {
-  //   if (refs.current !== "null" && refs.current.length > 0) {
-  //     console.log("refs: ", refs.current.length);
-  //   }
-    // if (showPlayAgainBttn) {
-    //   refs.current?.map((element) => {
-    //     return () => {
-    //       element.removeEventListener("click", handleMarkBox);
-    //     }
-    //   })
-    // }
-  // }, [showPlayAgainBttn]);
-
   useEffect(() => {
-    console.log("gameBoard: ", gameBoard);
-    console.log("refs: ", refs.current);
-  }, [gameBoard]);
-
-  // useEffect(() => {
-  //   console.log("currentPlayer: ", currentPlayer);
-  //   if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
-  //     const newGameBoard: string[][] = [...gameBoard];
-  //     const randomArray = Math.floor(Math.random() * newGameBoard.length);
-  //     const randomIndex = Math.floor(Math.random() * newGameBoard[randomArray].length);
+    // Checks if currentPlayer is not empty & if the currentPlayer is "Computer"
+    // Copy gameBoard and mark square with currentPlayer letter
+    if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
+      const newGameBoard = [...[gameBoard]][0];
       
-  //     setTimeout(() => {
-  //       if (newGameBoard[randomArray][randomIndex] === "") {
-  //         newGameBoard[randomArray].splice(randomIndex, 1, letter);
-  //         setGameBoard(newGameBoard);
-  //         checkForWinner();
-  //       }
-  //     }, 3000);
-  //   } 
-  // }, [currentPlayer]);
+      // Checks if newGameBoard is not undefined
+      if ( newGameBoard && (newGameBoard.length > 0) ) {
+        let randomIndex = 0;
+        while (newGameBoard[randomIndex] !== "") {
+          randomIndex = Math.floor(Math.random() * (newGameBoard.length - 1));
+        }
+        newGameBoard.splice(randomIndex, 1, letter);
+        setTimeout(() => {
+          setGameBoard(newGameBoard);
+          checkForWinner();
+        }, 2000);
+      }
+    } 
+  }, [currentPlayer, gameBoard]);
 
   const handleMarkBox = (arrayIndex: number) => {
     const newGameBoard = [...[gameBoard]][0];
     if ( newGameBoard && (newGameBoard.length > 0) ) {
       if (newGameBoard[arrayIndex] === "") {
         newGameBoard.splice(arrayIndex, 1, letter);
-        setGameBoard([...newGameBoard]);
+        setGameBoard(newGameBoard);
         checkForWinner();
       }
     }
   }
+
+  // const removeClick = () => {
+  //   gridRefs.current.map((el, index) => {
+  //     el?.removeEventListener("click", handleMarkBox);
+  //   });
+  // }
 
   const checkForWinner = () => {
     if ( gameBoard && (
@@ -112,9 +109,11 @@ const GameBoard = (
       if (currentPlayer.includes("X")) {
         setXWins(++xWins);
         setShowPlayAgainBttn(true);
+        // removeClick();
       } else {
         setOWins(++oWins);
         setShowPlayAgainBttn(true);
+        // removeClick();
       }
     } else {
       // Switch currentPlayer
@@ -129,11 +128,12 @@ const GameBoard = (
   return (
     <>
       <Paper variant="outlined" sx={{my: 2, p: 4, textAlign: "center"}}>
-        <Grid container wrap="wrap" direction="row" alignItems="center" justifyContent="center" ref={refs}>
+        <Grid container wrap="wrap" direction="row" alignItems="center" justifyContent="center">
           { gameBoard && gameBoard.length > 0 ? (
               gameBoard.map((string, index) => {
                 return (
-                  <Grid item xs={4} key={index} onClick={() => handleMarkBox(index)}>
+                  <Grid item xs={4} key={index} onClick={() => handleMarkBox(index)} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
+                  {/* <Grid item xs={4} key={index} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}> */}
                     <Box
                       component="div"
                       sx={{height: 90, border: 2}}
@@ -147,7 +147,7 @@ const GameBoard = (
           }
         </Grid>
       </Paper>
-      {/* <PlayAgainResetButtons 
+      <PlayAgainResetButtons 
         showPlayAgainBttn={showPlayAgainBttn}
         setShowPlayAgainBttn={setShowPlayAgainBttn}
         totalGameCount={totalGameCount}
@@ -161,7 +161,7 @@ const GameBoard = (
         setOWins={setOWins}
         initialArray={initialArray}
         setGameBoard={setGameBoard}
-      /> */}
+      />
     </>
   );
 }

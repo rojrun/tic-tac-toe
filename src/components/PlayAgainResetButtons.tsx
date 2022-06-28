@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Paper, ButtonGroup, Button} from '@mui/material';
 
 interface PlayAgainResetButtonsProps {
@@ -13,8 +13,9 @@ interface PlayAgainResetButtonsProps {
   setPlayerO: Function;
   setXWins: Function;
   setOWins: Function;
-  initialArray: string[];
   setGameBoard: Function;
+  setShowWinner: Function;
+  setRemoveClick: Function;
 }
 
 const PlayAgainResetButtons = (
@@ -30,20 +31,18 @@ const PlayAgainResetButtons = (
     setPlayerO,
     setXWins,
     setOWins,
-    initialArray,
-    setGameBoard
+    setGameBoard,
+    setShowWinner,
+    setRemoveClick
   }: PlayAgainResetButtonsProps) => {
 
-  useEffect(() => {
-    console.log("initialArray: ", initialArray);
-    
-  });  
-  
   const handlePlayAgain = () => {
     setTotalGameCount(++totalGameCount);
     setCurrentPlayer(playerX);
     setShowPlayAgainBttn(false);
-    setGameBoard(initialArray);
+    setShowWinner(false);
+    setRemoveClick(false);
+    clearBoard();
   }
 
   const handleResetGame = () => {
@@ -55,6 +54,17 @@ const PlayAgainResetButtons = (
     setPlayerO("");
     setXWins(0);
     setOWins(0);
+    setShowWinner(false);
+    setRemoveClick(false);
+    clearBoard();
+  }
+
+  const clearBoard = () => {
+    // Create an array of empty strings
+    const initialArray: string[] = [];
+    for (let i = 0; i < 9; i++) {
+      initialArray.push("");
+    }
     setGameBoard(initialArray);
   }
 

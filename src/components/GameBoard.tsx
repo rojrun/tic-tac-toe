@@ -16,6 +16,7 @@ interface GameBoardProps {
   totalGameCount: number;
   setTotalGameCount: Function;
   setVisible: Function;
+  setShowWinner: Function;
 }
 
 const GameBoard = (
@@ -32,26 +33,23 @@ const GameBoard = (
     setPlayerO,
     totalGameCount,
     setTotalGameCount,
-    setVisible
+    setVisible,
+    setShowWinner
   }: GameBoardProps) => {
 
   const [gameBoard, setGameBoard] = useState<string[] | undefined>();
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
+  const [removeClick, setRemoveClick] = useState<boolean>(false);
   const gridRefs = useRef<(HTMLDivElement | null)[]>([]);
   const letter = (currentPlayer.split(" "))[1];
-  const initialArray: string[] = [];
 
   useEffect(() => {
     // Create an array of empty strings
+    const initialArray: string[] = [];
     for (let i = 0; i < 9; i++) {
       initialArray.push("");
     }
     setGameBoard(initialArray);
-    console.log("initialArray: ", initialArray);
-    // Add event listener to ref elements
-    // gridRefs?.current.map((el, index) => {
-    //   el?.addEventListener("click", handleMarkBox);
-    // });
   }, []);
 
   useEffect(() => {
@@ -86,12 +84,6 @@ const GameBoard = (
     }
   }
 
-  // const removeClick = () => {
-  //   gridRefs.current.map((el, index) => {
-  //     el?.removeEventListener("click", handleMarkBox);
-  //   });
-  // }
-
   const checkForWinner = () => {
     if ( gameBoard && (
       // Horizontal lines
@@ -109,12 +101,13 @@ const GameBoard = (
       if (currentPlayer.includes("X")) {
         setXWins(++xWins);
         setShowPlayAgainBttn(true);
-        // removeClick();
+        setRemoveClick(true);
       } else {
         setOWins(++oWins);
         setShowPlayAgainBttn(true);
-        // removeClick();
+        setRemoveClick(true);
       }
+
     } else {
       // Switch currentPlayer
       if (currentPlayer.includes("X")) {
@@ -132,8 +125,7 @@ const GameBoard = (
           { gameBoard && gameBoard.length > 0 ? (
               gameBoard.map((string, index) => {
                 return (
-                  <Grid item xs={4} key={index} onClick={() => handleMarkBox(index)} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
-                  {/* <Grid item xs={4} key={index} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}> */}
+                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
                     <Box
                       component="div"
                       sx={{height: 90, border: 2}}
@@ -159,8 +151,9 @@ const GameBoard = (
         setPlayerO={setPlayerO}
         setXWins={setXWins}
         setOWins={setOWins}
-        initialArray={initialArray}
         setGameBoard={setGameBoard}
+        setShowWinner={setShowWinner}
+        setRemoveClick={setRemoveClick}
       />
     </>
   );

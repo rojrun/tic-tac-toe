@@ -62,6 +62,7 @@ const App = () => {
             setOWins={setOWins}
             totalGameCount={totalGameCount}
             setTotalGameCount={setTotalGameCount}
+            setShowWinner={setShowWinner}
           />
         </>
       }

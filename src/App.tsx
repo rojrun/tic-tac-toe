@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Paper} from '@mui/material';
+import Winner from './components/Winner';
 import StartGame from './components/StartGame';
 import Players from './components/Players';
 import GameBoard from './components/GameBoard';
@@ -13,10 +14,22 @@ const App = () => {
   const [totalGameCount, setTotalGameCount] = useState<number>(1);
   const [xWins, setXWins] = useState<number>(0);
   const [oWins, setOWins] = useState<number>(0);
+  const [showWinner, setShowWinner] = useState<boolean>(false);
   
+  useEffect(() => {
+    if ( (xWins !== 0) || (oWins !== 0) ) {
+      setShowWinner(true);
+    }
+  }, [xWins, oWins]);
+
   return (
     <Container maxWidth="xs">
-      <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>TIC TAC TOE</Paper>
+      <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>
+        { showWinner 
+          ? <Winner currentPlayer={currentPlayer} />
+          : <h1>TIC TAC TOE</h1> 
+        }
+      </Paper>
       { visible &&
         <StartGame 
           setVisible={setVisible} 
@@ -49,6 +62,7 @@ const App = () => {
             setOWins={setOWins}
             totalGameCount={totalGameCount}
             setTotalGameCount={setTotalGameCount}
+            setShowWinner={setShowWinner}
           />
         </>
       }

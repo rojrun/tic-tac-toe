@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <Container maxWidth="xs">
-      <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>
+      <Paper variant="outlined" sx={{my: 2, textAlign: "center"}}>
         { showWinner 
           ? <Winner currentPlayer={currentPlayer} />
           : <h1>TIC TAC TOE</h1> 

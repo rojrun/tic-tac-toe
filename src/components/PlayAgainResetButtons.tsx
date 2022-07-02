@@ -69,7 +69,7 @@ const PlayAgainResetButtons = (
   }
 
   return (
-    <Paper variant="outlined" sx={{my: 2, py:2, textAlign: "center"}}>
+    <Paper elevation={10} id="buttons_group" sx={{my: 2, py:2, textAlign: "center"}}>
       <ButtonGroup variant="outlined" aria-label="outlined primary button group">
           { showPlayAgainBttn &&
             <Button onClick={handlePlayAgain}>Play again</Button> 

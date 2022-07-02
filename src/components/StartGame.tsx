@@ -45,7 +45,7 @@ const StartGame = (
 
   return (
     <>
-      <Paper variant="outlined" sx={{my: 2, pb: 2, textAlign: "center"}}>
+      <Paper elevation={10} id="start_game" sx={{my: 2, py: 2, textAlign: "center"}}>
         <p>Welcome, is this a One or Two player game?</p>
         <ButtonGroup variant="outlined" aria-label="outlined primary button group">
           <Button onClick={handleOnePlayer}>One player</Button>
@@ -53,7 +53,7 @@ const StartGame = (
         </ButtonGroup>
       </Paper>
       { isPlayerSelected
-        ? <Paper variant="outlined" sx={{my: 2, pb: 2, textAlign: "center"}}>
+        ? <Paper elevation={10} id="player_select" sx={{my: 2, pb: 2, textAlign: "center"}}>
             <p>Player, select X or O.</p>
             <p>(X's go first)</p>
             <ButtonGroup variant="outlined" aria-label="outlined primary button group">

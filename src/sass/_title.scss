@@ -1,4 +1,10 @@
-#title {
+@use 'variables';
+
+#title, #winner {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+#winner {
+  color: variables.$red;
 }

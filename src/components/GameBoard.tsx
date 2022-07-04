@@ -71,7 +71,7 @@ const GameBoard = (
         }, 2000);
       }
     } 
-  }, [currentPlayer, gameBoard]);
+  });
 
   const handleMarkBox = (arrayIndex: number) => {
     const newGameBoard = [...[gameBoard]][0];
@@ -125,13 +125,13 @@ const GameBoard = (
           { gameBoard && gameBoard.length > 0 ? (
               gameBoard.map((string, index) => {
                 return (
-                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
+                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={(el: HTMLDivElement) => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
                     <Box
                       component="div"
-                      sx={{height: 90, border: 2}}
                     >
                       { !string ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{string}&nbsp;</span> }
                     </Box>
+
                   </Grid>
                 )
               })

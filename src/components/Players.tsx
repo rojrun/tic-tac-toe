@@ -21,14 +21,14 @@ const Players = (
   }: PlayersProps) => {  
   
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={2} sx={{my: 2, textAlign: "center"}}>
-      <Paper elevation={10} id="player_x" sx={{px: 2, width: 1, border: (currentPlayer.includes("X")) ? 3 : null}}>
+    <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{my: 2, textAlign: "center"}}>
+      <Paper elevation={10} id="player_x" className={(currentPlayer.includes("X")) ? "playerBorder" : ""} sx={{px: 2, width: 1}}>
         <p>{playerX}</p>
-        <p>score: {xWins} out of {totalGameCount}</p>
+        <p>wins: {xWins} out of {totalGameCount}</p>
       </Paper>
-      <Paper elevation={10} id="player_o" sx={{px: 2, width: 1, border: (currentPlayer.includes("O")) ? 3 : null}}>
+      <Paper elevation={10} id="player_o" className={(currentPlayer.includes("O")) ? "playerBorder" : ""} sx={{px: 2, width: 1}}>
         <p>{playerO}</p>
-        <p>score: {oWins} out of {totalGameCount}</p>
+        <p>wins: {oWins} out of {totalGameCount}</p>
       </Paper>
     </Stack>
   );

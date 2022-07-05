@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Paper} from '@mui/material';
-import Winner from './components/Winner';
-import StartGame from './components/StartGame';
-import Players from './components/Players';
-import GameBoard from './components/GameBoard';
-import './App.css';
+import Winner from './Winner';
+import StartGame from './StartGame';
+import Players from './Players';
+import GameBoard from './GameBoard';
+import '../sass/App.scss';
 
 const App = () => {
   const [visible, setVisible] = useState<boolean>(true);
@@ -24,10 +24,10 @@ const App = () => {
 
   return (
     <Container maxWidth="xs">
-      <Paper variant="outlined" sx={{my: 2, py: 2, textAlign: "center"}}>
+      <Paper elevation={10} sx={{my: 2, textAlign: "center"}}>
         { showWinner 
           ? <Winner currentPlayer={currentPlayer} />
-          : <h1>TIC TAC TOE</h1> 
+          : <h1 id="title">TIC TAC TOE</h1> 
         }
       </Paper>
       { visible &&

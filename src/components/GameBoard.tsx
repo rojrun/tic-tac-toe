@@ -71,7 +71,7 @@ const GameBoard = (
         }, 2000);
       }
     } 
-  }, [currentPlayer, gameBoard]);
+  });
 
   const handleMarkBox = (arrayIndex: number) => {
     const newGameBoard = [...[gameBoard]][0];
@@ -85,18 +85,18 @@ const GameBoard = (
   }
 
   const checkForWinner = () => {
-    if ( gameBoard && (
+    if (
       // Horizontal lines
-      (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ||
-      (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ||
-      (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ||
+      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ) ||
+      ( gameBoard && (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ) ||
+      ( gameBoard && (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ) ||
       // Vertical lines
-      (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ||
-      (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ||
-      (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ||
+      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ) ||
+      ( gameBoard && (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ) ||
+      ( gameBoard && (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ) ||
       // Diagonal lines
-      (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ||
-      (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) )
+      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ) ||
+      ( gameBoard && (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) )
     ) {
       if (currentPlayer.includes("X")) {
         setXWins(++xWins);
@@ -120,17 +120,16 @@ const GameBoard = (
 
   return (
     <>
-      <Paper variant="outlined" sx={{my: 2, p: 4, textAlign: "center"}}>
+      <Paper elevation={10} id="game_board" sx={{my: 2, p: 4, textAlign: "center"}}>
         <Grid container wrap="wrap" direction="row" alignItems="center" justifyContent="center">
           { gameBoard && gameBoard.length > 0 ? (
               gameBoard.map((string, index) => {
                 return (
-                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={el => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
+                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={(el: HTMLDivElement) => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
                     <Box
                       component="div"
-                      sx={{height: 90, border: 2}}
                     >
-                      { !string ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{string}&nbsp;</span> }
+                      { !string ? <span>&nbsp;</span> : <span>{string}</span> }
                     </Box>
                   </Grid>
                 )

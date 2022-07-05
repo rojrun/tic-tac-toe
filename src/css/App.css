@@ -1,0 +1,115 @@
+@font-face {
+  font-family: "PressStart2P";
+  src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background: #66B1F2 url("../images/tictactoeboard.png") round 1px 0;
+  margin: 0;
+  min-height: 100vh;
+}
+body #root div:first-child div {
+  background-color: #ffe5b4;
+}
+body #root div:first-child .css-731n85-MuiStack-root {
+  background-color: #66B1F2;
+}
+body #root div:first-child button {
+  background-color: #723AC1;
+  border-color: #ffe5b4;
+}
+
+/* Scrollbar */
+/* Width */
+*::-webkit-scrollbar {
+  background: #66B1F2;
+  width: 15px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px #ffffff;
+  border-radius: 10px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #723AC1;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #723AC1;
+}
+
+#title, #winner {
+  font-family: "PressStart2P";
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#winner {
+  color: #b30000;
+}
+
+#start_game p {
+  margin-top: 0;
+}
+
+#player_select p:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#player_select p:nth-child(2) {
+  margin-top: 0;
+}
+
+.css-731n85-MuiStack-root .playerBorder {
+  border: 0.4rem solid #b30000;
+}
+
+#game_board .css-0 {
+  border: 4px solid #0000a2;
+  height: calc(1.78vw + 78.32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+#game_board .css-0 span {
+  font-family: "Roboto";
+  font-size: calc(1.01vw + 46.22px);
+}
+#game_board div:first-child div:nth-child(1) > div {
+  border-top: none;
+  border-left: none;
+}
+#game_board div:first-child div:nth-child(2) > div {
+  border-top: none;
+}
+#game_board div:first-child div:nth-child(3) > div {
+  border-top: none;
+  border-right: none;
+}
+#game_board div:first-child div:nth-child(4) > div {
+  border-left: none;
+}
+#game_board div:first-child div:nth-child(6) > div {
+  border-right: none;
+}
+#game_board div:first-child div:nth-child(7) > div {
+  border-left: none;
+  border-bottom: none;
+}
+#game_board div:first-child div:nth-child(8) > div {
+  border-bottom: none;
+}
+#game_board div:first-child div:nth-child(9) > div {
+  border-right: none;
+  border-bottom: none;
+}

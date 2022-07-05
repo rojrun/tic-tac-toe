@@ -129,9 +129,8 @@ const GameBoard = (
                     <Box
                       component="div"
                     >
-                      { !string ? <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> : <span>&nbsp;{string}&nbsp;</span> }
+                      { !string ? <span>&nbsp;</span> : <span>{string}</span> }
                     </Box>
-
                   </Grid>
                 )
               })

@@ -17,6 +17,10 @@ const App = () => {
   const [showWinner, setShowWinner] = useState<boolean>(false);
   
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  useEffect(() => {
     if ( (xWins !== 0) || (oWins !== 0) ) {
       setShowWinner(true);
     }

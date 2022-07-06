@@ -1,9 +1,13 @@
 @use 'variables';
 
 #title, #winner {
-  font-family: "PressStart2P";
+  font-family: "playmegames";
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+#title {
+  letter-spacing: 0.1em;
 }
 
 #winner {

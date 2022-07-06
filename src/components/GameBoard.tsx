@@ -68,7 +68,7 @@ const GameBoard = (
         setTimeout(() => {
           setGameBoard(newGameBoard);
           checkForWinner();
-        }, 2000);
+        }, 1500);
       }
     } 
   });
@@ -98,6 +98,7 @@ const GameBoard = (
       ( gameBoard && (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ) ||
       ( gameBoard && (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) )
     ) {
+      // Three connections
       if (currentPlayer.includes("X")) {
         setXWins(++xWins);
         setShowPlayAgainBttn(true);
@@ -109,12 +110,18 @@ const GameBoard = (
       }
 
     } else {
-      // Switch currentPlayer
-      if (currentPlayer.includes("X")) {
-        setCurrentPlayer(playerO);
+      // Check array for empty string
+      if (gameBoard && gameBoard.includes("")) {
+        // Switch currentPlayer
+        if (currentPlayer.includes("X")) {
+          setCurrentPlayer(playerO);
+        } else {
+          setCurrentPlayer(playerX);
+        }
+
       } else {
-        setCurrentPlayer(playerX);
-      }
+        setShowPlayAgainBttn(true);
+      }  
     }
   }
 
@@ -129,7 +136,7 @@ const GameBoard = (
                     <Box
                       component="div"
                     >
-                      { !string ? <span>&nbsp;</span> : <span>{string}</span> }
+                      { !string ? <span>&nbsp;</span> : <span className="text_shadows">{string}</span> }
                     </Box>
                   </Grid>
                 )

@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "PressStart2P";
-  src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-family: "playmegames";
+  src: url("../fonts/playmegames.otf") format("opentype");
 }
 @font-face {
   font-family: "Roboto";
@@ -48,9 +48,13 @@ body #root div:first-child button {
 }
 
 #title, #winner {
-  font-family: "PressStart2P";
+  font-family: "playmegames";
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+#title {
+  letter-spacing: 0.1em;
 }
 
 #winner {
@@ -82,8 +86,48 @@ body #root div:first-child button {
   align-content: center;
 }
 #game_board .css-0 span {
-  font-family: "Roboto";
+  font-family: "playmegames";
   font-size: calc(1.01vw + 46.22px);
+}
+#game_board .css-0 .text_shadows {
+  color: #cd0000;
+  text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
+  animation: shadows 1.2s ease-in infinite;
+}
+@keyframes shadows {
+  0% {
+    text-shadow: none;
+  }
+  10% {
+    text-shadow: 3px 3px 0 #b30000;
+  }
+  20% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000;
+  }
+  30% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000;
+  }
+  40% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
+  }
+  50% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
+  }
+  60% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
+  }
+  70% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000;
+  }
+  80% {
+    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000;
+  }
+  90% {
+    text-shadow: 3px 3px 0 #b30000;
+  }
+  100% {
+    text-shadow: none;
+  }
 }
 #game_board div:first-child div:nth-child(1) > div {
   border-top: none;

@@ -53,12 +53,12 @@ body #root div:first-child button {
   padding-bottom: 1rem;
 }
 
-#title {
+#title, #winner {
   letter-spacing: 0.1em;
 }
 
 #winner {
-  color: #b30000;
+  color: #cd0000;
 }
 
 #start_game p {
@@ -74,7 +74,7 @@ body #root div:first-child button {
 }
 
 .css-731n85-MuiStack-root .playerBorder {
-  border: 0.4rem solid #b30000;
+  border: 0.4rem solid #cd0000;
 }
 
 #game_board .css-0 {
@@ -90,43 +90,17 @@ body #root div:first-child button {
   font-size: calc(1.01vw + 46.22px);
 }
 #game_board .css-0 .text_shadows {
-  color: #cd0000;
-  text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
-  animation: shadows 1.2s ease-in infinite;
+  animation: shadow 3s ease forwards infinite;
+  animation-delay: 0.5s;
 }
-@keyframes shadows {
-  0% {
-    text-shadow: none;
-  }
-  10% {
-    text-shadow: 3px 3px 0 #b30000;
-  }
-  20% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000;
-  }
-  30% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000;
-  }
-  40% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
+@keyframes shadow {
+  0%, 100% {
+    color: #cd0000;
+    text-shadow: 0 0 0 #000;
   }
   50% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
-  }
-  60% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000, 12px 12px 0 #670000;
-  }
-  70% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000, 9px 9px #800000;
-  }
-  80% {
-    text-shadow: 3px 3px 0 #b30000, 6px 6px 0 #9a0000;
-  }
-  90% {
-    text-shadow: 3px 3px 0 #b30000;
-  }
-  100% {
-    text-shadow: none;
+    color: #cd0000;
+    text-shadow: 0 30px 25px #000;
   }
 }
 #game_board div:first-child div:nth-child(1) > div {

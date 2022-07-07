@@ -7,7 +7,7 @@ interface WinnerProps {
 const Winner = ({currentPlayer}: WinnerProps) => {
   return (
     <>
-      <h1 id="winner">{currentPlayer} wins!!</h1>
+      <h1 id="winner">{currentPlayer} wins!</h1>
     </>
   );
 }

@@ -10,8 +10,24 @@
     align-content: center;
     
     & span {
-      font-family: "Roboto";
+      font-family: "playmegames";
       font-size: calc(1.01vw + 46.22px);
+    }
+
+    .text_shadows {
+      animation: shadow 3s ease forwards infinite;
+      animation-delay: .5s;
+    }
+
+    @keyframes shadow {
+      0%, 100% {
+        color: variables.$red;
+        text-shadow: 0 0 0 #000;
+      }
+      50% {
+        color: variables.$red;
+        text-shadow: 0 30px 25px #000;
+      }
     }
   }
 

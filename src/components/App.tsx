@@ -15,6 +15,11 @@ const App = () => {
   const [xWins, setXWins] = useState<number>(0);
   const [oWins, setOWins] = useState<number>(0);
   const [showWinner, setShowWinner] = useState<boolean>(false);
+  const [winArray, setWinArray] = useState<number[]>([]);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   useEffect(() => {
     if ( (xWins !== 0) || (oWins !== 0) ) {
@@ -63,6 +68,8 @@ const App = () => {
             totalGameCount={totalGameCount}
             setTotalGameCount={setTotalGameCount}
             setShowWinner={setShowWinner}
+            winArray={winArray}
+            setWinArray={setWinArray}
           />
         </>
       }

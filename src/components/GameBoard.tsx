@@ -17,6 +17,8 @@ interface GameBoardProps {
   setTotalGameCount: Function;
   setVisible: Function;
   setShowWinner: Function;
+  winArray: Array<number>;
+  setWinArray: Function;
 }
 
 const GameBoard = (
@@ -34,15 +36,17 @@ const GameBoard = (
     totalGameCount,
     setTotalGameCount,
     setVisible,
-    setShowWinner
+    setShowWinner,
+    winArray,
+    setWinArray
   }: GameBoardProps) => {
 
   const [gameBoard, setGameBoard] = useState<string[] | undefined>();
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
   const [removeClick, setRemoveClick] = useState<boolean>(false);
-  const gridRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const gridRefs = useRef<(HTMLDivElement | null)[]>([])
   const letter = (currentPlayer.split(" "))[1];
-
+  
   useEffect(() => {
     // Create an array of empty strings
     const initialArray: string[] = [];
@@ -68,7 +72,7 @@ const GameBoard = (
         setTimeout(() => {
           setGameBoard(newGameBoard);
           checkForWinner();
-        }, 2000);
+        }, 1500);
       }
     } 
   });
@@ -84,37 +88,74 @@ const GameBoard = (
     }
   }
 
-  const checkForWinner = () => {
-    if (
-      // Horizontal lines
-      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ) ||
-      ( gameBoard && (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ) ||
-      ( gameBoard && (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ) ||
-      // Vertical lines
-      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ) ||
-      ( gameBoard && (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ) ||
-      ( gameBoard && (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ) ||
-      // Diagonal lines
-      ( gameBoard && (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ) ||
-      ( gameBoard && (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) )
-    ) {
-      if (currentPlayer.includes("X")) {
-        setXWins(++xWins);
-        setShowPlayAgainBttn(true);
-        setRemoveClick(true);
-      } else {
-        setOWins(++oWins);
-        setShowPlayAgainBttn(true);
-        setRemoveClick(true);
-      }
-
+  const currentPlayerSetState = () => {
+    if (currentPlayer.includes("X")) {
+      setXWins(++xWins);
+      setShowPlayAgainBttn(true);
+      setRemoveClick(true);
     } else {
-      // Switch currentPlayer
-      if (currentPlayer.includes("X")) {
-        setCurrentPlayer(playerO);
-      } else {
-        setCurrentPlayer(playerX);
-      }
+      setOWins(++oWins);
+      setShowPlayAgainBttn(true);
+      setRemoveClick(true);
+    }
+  }
+
+  const checkForWinner = () => {
+    switch(true) {
+      // Horizontal lines
+      case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ):
+        setWinArray([0, 1, 2]);
+        currentPlayerSetState();
+        break;
+      case ( gameBoard && (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ):
+        setWinArray([3, 4, 5]);  
+        currentPlayerSetState();
+        break;
+      case ( gameBoard && (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ):
+        setWinArray([6, 7, 8]);
+        currentPlayerSetState();
+        break;
+        
+      // Vertical lines
+      case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ):
+        setWinArray([0, 3, 6]);
+        currentPlayerSetState();
+        break;
+      case ( gameBoard && (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ):
+        setWinArray([1, 4, 7]);
+        currentPlayerSetState();
+        break;
+      case ( gameBoard && (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ):
+        setWinArray([2, 5, 8]);
+        currentPlayerSetState();
+        break;
+
+      // Diagonal lines
+      case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ):
+        setWinArray([0, 4, 8]);
+        currentPlayerSetState();
+        break;
+      case ( gameBoard && (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) ):
+        setWinArray([2, 4, 6]);
+        currentPlayerSetState();
+        break;
+        
+      // Else
+      default:
+        // Check array for empty string
+        if (gameBoard && gameBoard.includes("")) {
+          // Switch currentPlayer
+          if (currentPlayer.includes("X")) {
+            setCurrentPlayer(playerO);
+          } else {
+            setCurrentPlayer(playerX);
+          }
+
+        } else {
+          // Tied game
+          setShowPlayAgainBttn(true);
+        }  
+        break;
     }
   }
 
@@ -129,7 +170,7 @@ const GameBoard = (
                     <Box
                       component="div"
                     >
-                      { !string ? <span>&nbsp;</span> : <span>{string}</span> }
+                      <span className={winArray.includes(index) ? "text_shadows" : ""}>{!string ? <>&nbsp;</> : string}</span>
                     </Box>
                   </Grid>
                 )
@@ -153,6 +194,7 @@ const GameBoard = (
         setGameBoard={setGameBoard}
         setShowWinner={setShowWinner}
         setRemoveClick={setRemoveClick}
+        setWinArray={setWinArray}
       />
     </>
   );

@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "PressStart2P";
-  src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-family: "playmegames";
+  src: url("../fonts/playmegames.otf") format("opentype");
 }
 @font-face {
   font-family: "Roboto";
@@ -48,13 +48,17 @@ body #root div:first-child button {
 }
 
 #title, #winner {
-  font-family: "PressStart2P";
+  font-family: "playmegames";
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
+#title, #winner {
+  letter-spacing: 0.1em;
+}
+
 #winner {
-  color: #b30000;
+  color: #cd0000;
 }
 
 #start_game p {
@@ -70,7 +74,7 @@ body #root div:first-child button {
 }
 
 .css-731n85-MuiStack-root .playerBorder {
-  border: 0.4rem solid #b30000;
+  border: 0.4rem solid #cd0000;
 }
 
 #game_board .css-0 {
@@ -82,8 +86,22 @@ body #root div:first-child button {
   align-content: center;
 }
 #game_board .css-0 span {
-  font-family: "Roboto";
+  font-family: "playmegames";
   font-size: calc(1.01vw + 46.22px);
+}
+#game_board .css-0 .text_shadows {
+  animation: shadow 3s ease forwards infinite;
+  animation-delay: 0.5s;
+}
+@keyframes shadow {
+  0%, 100% {
+    color: #cd0000;
+    text-shadow: 0 0 0 #000;
+  }
+  50% {
+    color: #cd0000;
+    text-shadow: 0 30px 25px #000;
+  }
 }
 #game_board div:first-child div:nth-child(1) > div {
   border-top: none;

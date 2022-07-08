@@ -1,9 +1,9 @@
 @use "variables";
 
 #game_board {
-  & .css-0 {
+  & .css-1raggo0 {
     border: 4px solid variables.$blue;
-    height: calc(1.78vw + 78.32px);
+    // height: calc(1.78vw + 78.32px);
     display: flex;
     justify-content: center;
     align-items: center;

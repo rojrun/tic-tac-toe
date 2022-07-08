@@ -19,6 +19,7 @@ interface GameBoardProps {
   setShowWinner: Function;
   winArray: Array<number>;
   setWinArray: Function;
+  setTiedGame: Function;
 }
 
 const GameBoard = (
@@ -38,13 +39,26 @@ const GameBoard = (
     setVisible,
     setShowWinner,
     winArray,
-    setWinArray
+    setWinArray,
+    setTiedGame
   }: GameBoardProps) => {
 
   const [gameBoard, setGameBoard] = useState<string[] | undefined>();
   const [showPlayAgainBttn, setShowPlayAgainBttn] = useState<boolean>(false);
   const [removeClick, setRemoveClick] = useState<boolean>(false);
-  const gridRefs = useRef<(HTMLDivElement | null)[]>([])
+  const gridRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const useRefDimension = (ref: React.RefObject<HTMLElement>) => {
+    const [elWidth, setElWidth] = useState<number>(1);
+    useEffect(() => {
+      if (ref.current) {
+        const square = ref.current[4].getBoundingClientRect();
+        console.log("square: ", square);
+        setElWidth(square);
+      }
+    }, [ref]);
+    return elWidth;
+  }
+  const widthDimension = useRefDimension(gridRefs);
   const letter = (currentPlayer.split(" "))[1];
   
   useEffect(() => {
@@ -76,6 +90,15 @@ const GameBoard = (
       }
     } 
   });
+
+  // useEffect(() => {
+  //   if (gridRefs.current.length === 9) {
+  //     // console.log("element 9 width: ", gridRefs.current[4].offsetWidth);
+  //     const el4Width = gridRefs.current[4]!.clientWidth - 8;
+  //     console.log("el4Width: ", el4Width);
+  //     setElWidth(el4Width);
+  //   }
+  // }, [gameBoard]);
 
   const handleMarkBox = (arrayIndex: number) => {
     const newGameBoard = [...[gameBoard]][0];
@@ -153,6 +176,7 @@ const GameBoard = (
 
         } else {
           // Tied game
+          setTiedGame(true);
           setShowPlayAgainBttn(true);
         }  
         break;
@@ -169,6 +193,8 @@ const GameBoard = (
                   <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={(el: HTMLDivElement) => (gridRefs.current.length !== gameBoard.length ? gridRefs.current.push(el) : null)}>
                     <Box
                       component="div"
+                      height={widthDimension}
+                      // height={gridRefs.current.length ? elWidth : 0}
                     >
                       <span className={winArray.includes(index) ? "text_shadows" : ""}>{!string ? <>&nbsp;</> : string}</span>
                     </Box>
@@ -195,6 +221,7 @@ const GameBoard = (
         setShowWinner={setShowWinner}
         setRemoveClick={setRemoveClick}
         setWinArray={setWinArray}
+        setTiedGame={setTiedGame}
       />
     </>
   );

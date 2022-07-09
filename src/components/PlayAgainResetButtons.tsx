@@ -17,6 +17,7 @@ interface PlayAgainResetButtonsProps {
   setShowWinner: Function;
   setRemoveClick: Function;
   setWinArray: Function;
+  setTiedGame: Function;
 }
 
 const PlayAgainResetButtons = (
@@ -35,7 +36,8 @@ const PlayAgainResetButtons = (
     setGameBoard,
     setShowWinner,
     setRemoveClick,
-    setWinArray
+    setWinArray,
+    setTiedGame
   }: PlayAgainResetButtonsProps) => {
 
   const handlePlayAgain = () => {
@@ -44,6 +46,7 @@ const PlayAgainResetButtons = (
     setShowPlayAgainBttn(false);
     setShowWinner(false);
     setRemoveClick(false);
+    setTiedGame(false);
     setWinArray([]);
     clearBoard();
   }
@@ -59,6 +62,7 @@ const PlayAgainResetButtons = (
     setOWins(0);
     setShowWinner(false);
     setRemoveClick(false);
+    setTiedGame(false);
     setWinArray([]);
     clearBoard();
   }

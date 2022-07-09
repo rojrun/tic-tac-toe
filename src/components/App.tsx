@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Paper} from '@mui/material';
-import Winner from './Winner';
 import StartGame from './StartGame';
 import Players from './Players';
 import GameBoard from './GameBoard';
@@ -16,6 +15,7 @@ const App = () => {
   const [oWins, setOWins] = useState<number>(0);
   const [showWinner, setShowWinner] = useState<boolean>(false);
   const [winArray, setWinArray] = useState<number[]>([]);
+  const [tiedGame, setTiedGame] = useState<boolean>(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,7 +31,9 @@ const App = () => {
     <Container maxWidth="xs">
       <Paper elevation={10} sx={{my: 2, textAlign: "center"}}>
         { showWinner 
-          ? <Winner currentPlayer={currentPlayer} />
+          ? <h1 id="winner">{currentPlayer} wins!</h1>
+          : tiedGame 
+          ? <h1 id="tied_game">NO WINNER</h1>
           : <h1 id="title">TIC TAC TOE</h1> 
         }
       </Paper>
@@ -70,6 +72,7 @@ const App = () => {
             setShowWinner={setShowWinner}
             winArray={winArray}
             setWinArray={setWinArray}
+            setTiedGame={setTiedGame}
           />
         </>
       }

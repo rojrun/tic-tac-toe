@@ -1,15 +1,12 @@
 @use 'variables';
 
-#title, #winner {
+#title, #winner, #tied_game {
   font-family: "playmegames";
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-#title, #winner {
   letter-spacing: 0.1em;
 }
 
-#winner {
+#winner, #tied_game {
   color: variables.$red;
 }

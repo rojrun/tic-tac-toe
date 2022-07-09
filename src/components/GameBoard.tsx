@@ -60,27 +60,24 @@ const GameBoard = (
   }, []);
 
   useEffect(() => {
-    console.log("currentPlayer: ", currentPlayer);
-    console.log('gameBoard: ', gameBoard);
-    // Checks if currentPlayer is not empty & if the currentPlayer is "Computer"
+    // Checks if the currentPlayer is "Computer"
     // Copy gameBoard and mark square with currentPlayer letter
-    // if ( (currentPlayer !== "") && (currentPlayer.includes("Computer")) ) {
-    if (currentPlayer.includes("Computer")) {  
-      const newGameBoard = [...[gameBoard]][0];
-      
-      // Checks if newGameBoard is not undefined
-      if ( newGameBoard && (newGameBoard.length > 0) ) {
-        let randomIndex = 0;
-        while (newGameBoard[randomIndex] !== "") {
-          randomIndex = Math.floor(Math.random() * (newGameBoard.length - 1));
-        }
-        newGameBoard.splice(randomIndex, 1, letter);
-        setTimeout(() => {
+    setTimeout(() => {
+      if (currentPlayer.includes("Computer")) {  
+        const newGameBoard = [...[gameBoard]][0];
+        
+        // Checks if newGameBoard is not undefined
+        if ( newGameBoard && (newGameBoard.length > 0) ) {
+          let randomIndex = 0;
+          while (newGameBoard[randomIndex] !== "") {
+            randomIndex = Math.floor(Math.random() * (newGameBoard.length - 1));
+          }
+          newGameBoard.splice(randomIndex, 1, letter);
           setGameBoard(newGameBoard);
           checkForWinner();
-        }, 2000);
+        }
       }
-    } 
+    }, 1600); 
   }, [currentPlayer, gameBoard]);
 
   useEffect(() => {
@@ -88,9 +85,7 @@ const GameBoard = (
   }, [gameBoard]);
 
   useLayoutEffect(()=> {
-    window.addEventListener('resize', () => {
-      getSquareWidth();
-    });
+    window.addEventListener('resize', getSquareWidth);
   });
 
   const getSquareWidth = () => {
@@ -111,7 +106,7 @@ const GameBoard = (
     }
   }
 
-  const swapPlayer = () => {
+  const switchPlayer = () => {
     if (currentPlayer.includes("X")) {
       setXWins(++xWins);
       setShowPlayAgainBttn(true);
@@ -128,39 +123,39 @@ const GameBoard = (
       // Horizontal lines
       case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[1] === letter) && (gameBoard[2] === letter) ):
         setWinArray([0, 1, 2]);
-        swapPlayer();
+        switchPlayer();
         break;
       case ( gameBoard && (gameBoard[3] === letter) && (gameBoard[4] === letter) && (gameBoard[5] === letter) ):
         setWinArray([3, 4, 5]);  
-        swapPlayer();
+        switchPlayer();
         break;
       case ( gameBoard && (gameBoard[6] === letter) && (gameBoard[7] === letter) && (gameBoard[8] === letter) ):
         setWinArray([6, 7, 8]);
-        swapPlayer();
+        switchPlayer();
         break;
         
       // Vertical lines
       case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[3] === letter) && (gameBoard[6] === letter) ):
         setWinArray([0, 3, 6]);
-        swapPlayer();
+        switchPlayer();
         break;
       case ( gameBoard && (gameBoard[1] === letter) && (gameBoard[4] === letter) && (gameBoard[7] === letter) ):
         setWinArray([1, 4, 7]);
-        swapPlayer();
+        switchPlayer();
         break;
       case ( gameBoard && (gameBoard[2] === letter) && (gameBoard[5] === letter) && (gameBoard[8] === letter) ):
         setWinArray([2, 5, 8]);
-        swapPlayer();
+        switchPlayer();
         break;
 
       // Diagonal lines
       case ( gameBoard && (gameBoard[0] === letter) && (gameBoard[4] === letter) && (gameBoard[8] === letter) ):
         setWinArray([0, 4, 8]);
-        swapPlayer();
+        switchPlayer();
         break;
       case ( gameBoard && (gameBoard[2] === letter) && (gameBoard[4] === letter) && (gameBoard[6] === letter) ):
         setWinArray([2, 4, 6]);
-        swapPlayer();
+        switchPlayer();
         break;
         
       // Else

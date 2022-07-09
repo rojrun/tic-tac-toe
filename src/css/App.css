@@ -86,7 +86,7 @@ body #root div:first-child button {
   font-size: calc(1.01vw + 46.22px);
 }
 #game_board div:first-child .MuiGrid-item div .text_shadows {
-  animation: shadow 3s ease forwards infinite;
+  animation: shadow 2s ease forwards infinite;
   animation-delay: 0.5s;
 }
 @keyframes shadow {

@@ -74,18 +74,18 @@ body #root div:first-child button {
   border: 0.4rem solid #cd0000;
 }
 
-#game_board .css-1raggo0 {
+#game_board div:first-child .MuiGrid-item div {
   border: 4px solid #0000a2;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
 }
-#game_board .css-1raggo0 span {
+#game_board div:first-child .MuiGrid-item div span {
   font-family: "playmegames";
   font-size: calc(1.01vw + 46.22px);
 }
-#game_board .css-1raggo0 .text_shadows {
+#game_board div:first-child .MuiGrid-item div .text_shadows {
   animation: shadow 3s ease forwards infinite;
   animation-delay: 0.5s;
 }

@@ -73,6 +73,13 @@ body #root div:first-child button {
 .css-731n85-MuiStack-root .playerBorder {
   border: 0.4rem solid #cd0000;
 }
+.css-731n85-MuiStack-root p:first-child {
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.css-731n85-MuiStack-root p:nth-child(2) {
+  margin-top: 0;
+}
 
 #game_board div:first-child .MuiGrid-item div {
   border: 4px solid #0000a2;

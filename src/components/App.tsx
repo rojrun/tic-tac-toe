@@ -18,10 +18,6 @@ const App = () => {
   const [tiedGame, setTiedGame] = useState<boolean>(false);
   
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  
-  useEffect(() => {
     if ( (xWins !== 0) || (oWins !== 0) ) {
       setShowWinner(true);
     }
@@ -33,8 +29,8 @@ const App = () => {
         { showWinner 
           ? <h1 id="winner">{currentPlayer} wins!</h1>
           : tiedGame 
-          ? <h1 id="tied_game">NO WINNER</h1>
-          : <h1 id="title">TIC TAC TOE</h1> 
+            ? <h1 id="tied_game">NO WINNER</h1>
+            : <h1 id="title">TIC TAC TOE</h1> 
         }
       </Paper>
       { visible &&

@@ -70,14 +70,14 @@ const GameBoard = (
         if ( newGameBoard && (newGameBoard.length > 0) ) {
           let randomIndex = 0;
           while (newGameBoard[randomIndex] !== "") {
-            randomIndex = Math.floor(Math.random() * (newGameBoard.length - 1));
+            randomIndex = Math.floor(Math.random() * newGameBoard.length);
           }
           newGameBoard.splice(randomIndex, 1, letter);
           setGameBoard(newGameBoard);
           checkForWinner();
         }
       }
-    }, 1600); 
+    }, 1500); 
   }, [currentPlayer, gameBoard]);
 
   useEffect(() => {

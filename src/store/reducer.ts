@@ -1,5 +1,1 @@
-import * as actionTypes from './actionTypes';
-
-const initialState: CurrentPlayerState = {
-  player: ""
-};
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';

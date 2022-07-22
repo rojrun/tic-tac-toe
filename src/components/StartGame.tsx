@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Paper, ButtonGroup, Button} from '@mui/material';
 
-interface StartGameProps {
+export interface StartGameProps {
   setVisible: Function;
   setPlayerX: Function;
   setPlayerO: Function;

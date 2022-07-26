@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../components/App';
 import StartGame from '../components/StartGame';
-import StartGameProps from '../components/StartGame';
+import {StartGameProps} from '../types';
 
 describe("On load, render div with tic tac toe and how many players", () => {
   test("renders with h1 title", () => {

@@ -1,26 +1,7 @@
 import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
+import {GameBoardProps} from '../types';
 import PlayAgainResetButtons from './PlayAgainResetButtons';
 import {Box, Paper, Grid} from '@mui/material';
-
-interface GameBoardProps {
-  currentPlayer: string;
-  setCurrentPlayer: Function;
-  xWins: number;
-  setXWins: Function;
-  oWins: number;
-  setOWins: Function;
-  playerX: string;
-  setPlayerX: Function;
-  playerO: string;
-  setPlayerO: Function;
-  totalGameCount: number;
-  setTotalGameCount: Function;
-  setVisible: Function;
-  setShowWinner: Function;
-  winArray: Array<number>;
-  setWinArray: Function;
-  setTiedGame: Function;
-}
 
 const GameBoard = (
   {

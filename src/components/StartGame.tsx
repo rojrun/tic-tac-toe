@@ -42,8 +42,8 @@ const StartGame = (
       <Paper elevation={10} id="start_game" sx={{my: 2, py: 2, textAlign: "center"}}>
         <p>Welcome, is this a One or Two player game?</p>
         <ButtonGroup variant="contained" aria-label="outlined primary button group">
-          <Button onClick={handleOnePlayer}>One player</Button>
-          <Button onClick={handleTwoPlayers}>Two players</Button>
+          <Button onClick={handleOnePlayer} data-testid="onePlayer">One player</Button>
+          <Button onClick={handleTwoPlayers} data-testid="twoPlayers">Two players</Button>
         </ButtonGroup>
       </Paper>
       { isPlayerSelected
@@ -51,8 +51,8 @@ const StartGame = (
             <p>Player, select X or O.</p>
             <p>(X's go first)</p>
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-              <Button onClick={handleSelectX}>X</Button>
-              <Button onClick={handleSelectO}>O</Button>
+              <Button onClick={handleSelectX} data-testid="x">X</Button>
+              <Button onClick={handleSelectO} data-testid="o">O</Button>
             </ButtonGroup>
           </Paper>
         : null

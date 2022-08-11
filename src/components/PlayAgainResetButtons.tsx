@@ -1,24 +1,6 @@
 import React from 'react';
+import {PlayAgainResetButtonsProps} from '../types';
 import {Paper, ButtonGroup, Button} from '@mui/material';
-
-interface PlayAgainResetButtonsProps {
-  showPlayAgainBttn: boolean;
-  setShowPlayAgainBttn: Function;
-  totalGameCount: number; 
-  setTotalGameCount: Function;
-  setVisible: Function;
-  setCurrentPlayer: Function;
-  playerX: string;
-  setPlayerX: Function;
-  setPlayerO: Function;
-  setXWins: Function;
-  setOWins: Function;
-  setGameBoard: Function;
-  setShowWinner: Function;
-  setRemoveClick: Function;
-  setWinArray: Function;
-  setTiedGame: Function;
-}
 
 const PlayAgainResetButtons = (
   {

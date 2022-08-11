@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Roj Rungsisullatanont",
+  "homepage": "https://rojrundev.com/tic-tac-toe",
   "repository": {
     "type": "git",
     "url": "https://github.com/rojrun/tic-tac-toe.git"
@@ -29,7 +30,7 @@
     "start": "react-scripts start",
     "sass": "sass src/sass:src/css --watch --no-source-map",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

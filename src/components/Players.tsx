@@ -1,14 +1,6 @@
 import React from 'react';
+import {PlayersProps} from '../types';
 import {Paper, Stack} from '@mui/material';
-
-interface PlayersProps {
-  playerX: string;
-  playerO: string;
-  currentPlayer: string;
-  xWins: number;
-  oWins: number;
-  totalGameCount: number;
-}
 
 const Players = (
   {

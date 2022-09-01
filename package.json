@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "author": "Roj Rungsisullatanont",
-  "homepage": "./",
   "repository": {
     "type": "git",
     "url": "https://github.com/rojrun/tic-tac-toe.git"

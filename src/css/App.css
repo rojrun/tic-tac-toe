@@ -8,7 +8,7 @@
 }
 body {
   font-family: "Roboto", sans-serif;
-  background: #66B1F2 url("../images/tictactoeboard.png") round 1px 0;
+  background: #66B1F2 url("../../public/images/tictactoeboard.png") round 1px 0;
   margin: 0;
   min-height: 100vh;
 }
@@ -87,6 +87,9 @@ body #root div:first-child button {
   justify-content: center;
   align-items: center;
   align-content: center;
+}
+#game_board div:first-child .MuiGrid-item div:hover {
+  cursor: pointer;
 }
 #game_board div:first-child .MuiGrid-item div span {
   font-family: "playmegames";

@@ -166,7 +166,11 @@ const GameBoard = (
           { gameBoard && gameBoard.length > 0 ? (
               gameBoard.map((string, index) => {
                 return (
-                  <Grid item xs={4} key={index} onClick={() => !removeClick ? handleMarkBox(index) : null} ref={(el: HTMLDivElement) => (gridRefs.current?.length !== gameBoard.length ? gridRefs.current?.push(el) : null)}>
+                  <Grid 
+                    item xs={4} key={index} 
+                    onClick={() => !removeClick ? handleMarkBox(index) : null} 
+                    ref={(el: HTMLDivElement) => (gridRefs.current?.length !== gameBoard.length ? gridRefs.current?.push(el) : null)}
+                  >
                     <Box
                       component="div"
                       height={elWidth}

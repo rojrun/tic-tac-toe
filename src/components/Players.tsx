@@ -13,7 +13,7 @@ const Players = (
   }: PlayersProps) => {  
   
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{my: 2, textAlign: "center"}}>
+    <Stack id="all_players" direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{my: 2, textAlign: "center"}}>
       <Paper elevation={10} id="player_x" className={(currentPlayer.includes("X")) ? "playerBorder" : ""} sx={{px: 2, width: 1}}>
         <p>{playerX}</p>
         <p>wins: {xWins} out of {totalGameCount}</p>

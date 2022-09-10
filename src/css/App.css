@@ -15,9 +15,6 @@ body {
 body #root div:first-child div {
   background-color: #ffe5b4;
 }
-body #root div:first-child .css-731n85-MuiStack-root {
-  background-color: #66B1F2;
-}
 body #root div:first-child button {
   background-color: #723AC1;
   border-color: #ffe5b4;
@@ -70,14 +67,17 @@ body #root div:first-child button {
   margin-top: 0;
 }
 
-.css-731n85-MuiStack-root .playerBorder {
+#all_players {
+  background: none !important;
+}
+#all_players .playerBorder {
   border: 0.4rem solid #cd0000;
 }
-.css-731n85-MuiStack-root p:first-child {
+#all_players p:first-child {
   font-weight: 700;
   margin-bottom: 0.3rem;
 }
-.css-731n85-MuiStack-root p:nth-child(2) {
+#all_players p:nth-child(2) {
   margin-top: 0;
 }
 
